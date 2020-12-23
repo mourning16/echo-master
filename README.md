@@ -1,5 +1,2 @@
 # echo-master
-BIO
-NIO
-AIO
-NETTY
+I/O模型练习；
