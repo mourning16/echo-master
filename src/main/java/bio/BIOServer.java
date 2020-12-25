@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 public class BIOServer {
 
     public static void main(String[] args) {
+
         ServerSocket serverSocket = null;
 
         try {
@@ -65,7 +66,7 @@ public class BIOServer {
                     System.out.println("线程处理客户端请求  线程Id：" + Thread.currentThread().getId());
                     System.out.println("客户端消息来了：" + val);
                     if(InfoConstant.BYE_BYE.equals(val)){
-                        printStream.println("[echo] : BYEBYE 咧 ，~~");
+                        printStream.println("[BIOECHO] : BYEBYE 咧 ，~~");
                         flag = false;
                     }else{
                         printStream.println("服务端响应：" + val);
