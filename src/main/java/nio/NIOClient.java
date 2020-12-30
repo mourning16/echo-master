@@ -41,7 +41,6 @@ public class NIOClient {
                 byteBuffer.flip();
                 socketChannel.write(byteBuffer);
 
-
                 byteBuffer.clear();
                 int read = socketChannel.read(byteBuffer);
                 byteBuffer.flip();
