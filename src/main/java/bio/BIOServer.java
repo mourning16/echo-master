@@ -59,8 +59,9 @@ public class BIOServer {
 
         @Override
         public void run(){
-
+            //为了不断接受来自客户端的请求
             while(flag){
+                //会阻塞
                 if(scanner.hasNext()){
                     String val = scanner.next().trim();
                     System.out.println("线程处理客户端请求  线程Id：" + Thread.currentThread().getId());

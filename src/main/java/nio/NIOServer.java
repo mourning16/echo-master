@@ -4,13 +4,10 @@ import constant.InfoConstant;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -34,7 +31,7 @@ public class NIOServer {
         try {
             //打开一个channel
             serverSocketChannel = ServerSocketChannel.open();
-            //使用非阻塞模式
+            //设置为非阻塞
             serverSocketChannel.configureBlocking(false);
             //绑定一个端口号
             ServerSocketChannel bind = serverSocketChannel.bind(new InetSocketAddress(InfoConstant.PORT));
@@ -47,12 +44,13 @@ public class NIOServer {
 
             //Nio采用轮询模式，每来一个请求，启用一个线程处理请求
             int selectKeySize = 0;
-            //接收轮询状态
+
             while((selectKeySize = selector.select())>0){
 
                 //获取全部的key
                 Set<SelectionKey> selectionKeys = selector.keys();
                 Iterator<SelectionKey> iterator = selectionKeys.iterator();
+                //轮询判断socketClient的状态
                 while(iterator.hasNext()){
                     SelectionKey selectionKey  = iterator.next();
                     if(selectionKey.isAcceptable()) {
