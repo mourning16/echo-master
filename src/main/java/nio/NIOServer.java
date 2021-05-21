@@ -1,9 +1,9 @@
 package nio;
 
 import constant.InfoConstant;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
@@ -38,7 +38,7 @@ public class NIOServer {
 
             //一个selector管理所有的serversocketchannel
             Selector selector = Selector.open();
-            //连接时处理
+            //连接时处理 表示channel想要进行读写的操作
             serverSocketChannel.register(selector,SelectionKey.OP_ACCEPT);
             System.out.println("启动一个NIO模型的客户端，端口号：" + InfoConstant.PORT);
 
@@ -47,7 +47,7 @@ public class NIOServer {
 
             while((selectKeySize = selector.select())>0){
 
-                //获取全部的key
+                //把channel以selectionKeys的方式提出来
                 Set<SelectionKey> selectionKeys = selector.keys();
                 Iterator<SelectionKey> iterator = selectionKeys.iterator();
                 //轮询判断socketClient的状态
